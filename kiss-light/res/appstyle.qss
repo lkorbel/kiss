@@ -1,0 +1,102 @@
+QWidget {
+  color: #8ac0d7;
+  background-color: #152330;
+  font-size: 24px;
+}
+
+QPushButton {
+  border-width: 10px;
+  border-image: url("style/button.png");
+  color: #20364a;
+}
+
+QPushButton:pressed {
+  color: #6da9e1;
+  border-image: url("style/button-pressed.png");
+}
+
+QPushButton:hover:!pressed {
+  color: #2b4963;
+}
+
+QPushButton:checked {
+  color: #b3d42e;
+}
+
+QPushButton:checked:hover {
+  color: #c8ed33;
+}
+
+QPushButton#playButton1 {
+  font-size: 30px;
+}
+
+QPushButton#playButton2 {
+  font-size: 30px;
+}
+
+QPushButton#playButton3 {
+  font-size: 30px;
+}
+
+QLabel#song1Label {
+  font-size: 28px;
+}
+
+QLabel#song2Label {
+  font-size: 28px;
+}
+
+QLabel#song3Label {
+  font-size: 28px;
+}
+
+QLabel#info {
+  font-size: 34px;
+  color: #61b300;
+}
+
+QLabel#warning {
+  font-size: 35px;
+  color: #e5b200;
+}
+
+QLabel#critical {
+  font-size: 36px;
+  color: #ec3011;
+}
+
+QLabel#timeLabel {
+  font-size: 80px;
+}
+
+QLabel#infoLabel {
+  font-size: 30px;
+  color: #bc1b3a;
+}
+
+QLabel#fileLabel {
+  font-size: 18px;
+}
+
+QPushButton#settingsButton{
+  font-size: 15px;
+}
+
+QWidget#GlobalSettings {
+  font-size: 15px;
+}
+
+QLineEdit {
+  font-size: 15px;
+}
+
+QLineEdit#song1Edit {
+  font-size: 30px;
+}
+QLineEdit#song2Edit {
+  font-size: 30px;
+}
+QLineEdit#song3Edit {
+  font-size: 30px;
+}
