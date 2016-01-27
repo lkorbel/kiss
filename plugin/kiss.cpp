@@ -2,13 +2,10 @@
 #include <QSettings>
 #include <QDate>
 #include <QTime>
-#include <QFile>
+#include <QUrl>
 #include <vlc/vlc.h>
 //TODO add SONG_COUNT to setting
 #define SONG_COUNT 142
-//----------------------------------------------------------------------------//
-//QString to const char*
-#define PSZ(qstring) qstring.toLocal8Bit().constData()
 //----------------------------------------------------------------------------//
 #define VLC_DEBUG "-I", "dummy", "-vvv"
 #define VLC_USE_CONF "--no-ignore-config", "--config=vlcrc"
@@ -38,28 +35,26 @@ Kiss:: ~Kiss()
 //----------------------------------------------------------------------------//
 QString Kiss:: songsPath() const
 {
-    return songsPath_;
+    return songsDir_.path();
 }
 //----------------------------------------------------------------------------//
 void Kiss:: setSongsPath( QString path)
 {
-    if (path != songsPath_)
-    {
-        songsPath_ = path;
+    if (path != songsDir_.path()) {
+        songsDir_.setPath(path);
         emit songsPathChanged();
     }
 }
 //----------------------------------------------------------------------------//
 QString Kiss:: recordsPath() const
 {
-    return recordsPath_;
+    return recordsDir_.path();
 }
 //----------------------------------------------------------------------------//
 void Kiss:: setRecordsPath( QString path)
 {
-    if (path != recordsPath_)
-    {
-        recordsPath_ = path;
+    if (path != recordsDir_.path()) {
+        recordsDir_.setPath(path);
         emit recordsPathChanged();
     }
 }
@@ -126,18 +121,19 @@ void Kiss:: setWatchtowerTime( const QTime& time)
 //----------------------------------------------------------------------------//
 void Kiss:: startRecording( QString name)
 {
-    if (isRecording_)
-    {
+    if (isRecording_) {
         qWarning("KiSS: attempt to restart running record, should stop first");
         return;
     }
     
     QString input = recordInput_;
     QString output = "#transcode{vcodec=none,acodec=mp3,ab=128,channels=2,samplerate=44100}"
-                     ":file{dst=" + recordsPath_ + "/" + name + ".mp3}";
+                     ":file{dst=" + QUrl::fromLocalFile(
+                                    recordsDir_.absoluteFilePath(name + ".mp3")).toString()
+                     + "}";
     
-    if (libvlc_vlm_add_broadcast( vlcInstance_, "record", PSZ(input), 
-                                  PSZ(output), 0, 0, 1, 0) == 0)
+    if (libvlc_vlm_add_broadcast( vlcInstance_, "record", qPrintable(input),
+                                  qPrintable(output), 0, 0, 1, 0) == 0)
     {
         libvlc_vlm_play_media( vlcInstance_, "record");
         isRecording_ = true;
@@ -147,8 +143,7 @@ void Kiss:: startRecording( QString name)
 //----------------------------------------------------------------------------//
 void Kiss:: stopRecording()
 {
-    if (isRecording_)
-    {
+    if (isRecording_) {
         libvlc_vlm_stop_media( vlcInstance_, "record");
         libvlc_vlm_del_media( vlcInstance_, "record");
         isRecording_ = false;
@@ -158,25 +153,27 @@ void Kiss:: stopRecording()
 QString Kiss:: generateRecordName()
 {
     QString filename = QDate::currentDate().toString("yyyy-MM-dd-dddd");
-    if (QFile::exists( recordsPath_ + "/" + filename + ".mp3")) //prevent overwrite
+    if (recordsDir_.exists(filename + ".mp3")) //prevent overwrite
         filename += QTime::currentTime().toString("-hhmm");
     return filename;
 }
 //----------------------------------------------------------------------------//
 void Kiss:: startMusic( int number)
 {
-    if (isPlaying_)
-    {
+    if (isPlaying_) {
         qWarning("KiSS: attempt to restart running music, should stop first");
         return;
     }
-    
-    QString input = "file://" + songsPath_ + 
-                     QString("/%1.mp3").arg( QString::number(number), 3, '0');
+
+    QString input = QUrl::fromLocalFile(
+                    songsDir_.absoluteFilePath(
+                    QString("%1.mp3").arg( QString::number(number), 3, '0')))
+                    .toString();
+
     QString output = "#display";
     
-    if (libvlc_vlm_add_broadcast( vlcInstance_, "music", PSZ(input), 
-                                  PSZ(output), 0, 0, 1, 0) == 0)
+    if (libvlc_vlm_add_broadcast( vlcInstance_, "music", qPrintable(input),
+                                  qPrintable(output), 0, 0, 1, 0) == 0)
     {
         libvlc_vlm_play_media( vlcInstance_, "music");
         isPlaying_ = true;
@@ -191,8 +188,7 @@ void Kiss:: startMusic( int number)
 //----------------------------------------------------------------------------//
 void Kiss:: stopMusic()
 {
-    if (isPlaying_)
-    {
+    if (isPlaying_) {
         libvlc_vlm_stop_media( vlcInstance_, "music");
         libvlc_vlm_del_media( vlcInstance_, "music");
         isPlaying_ = false;
@@ -218,15 +214,18 @@ void Kiss:: loadSettings()
     setWatchtowerDay( sets.value("watchtower_day").toInt());
     setWatchtowerTime( sets.value("watchtower_time").toTime());
 
-    qDebug("song path: %s\nrecord path: %s\nrecord input: %s", PSZ(songsPath_), PSZ(recordsPath_), PSZ(recordInput_));
+    qDebug("song path: %s\nrecord path: %s\nrecord input: %s",
+           qPrintable(songsDir_.path()),
+           qPrintable(recordsDir_.path()),
+           qPrintable(recordInput_));
 }
 //----------------------------------------------------------------------------//
 void Kiss:: saveSettings()
 {
     QSettings sets("kiss.conf", QSettings::IniFormat);
     
-    sets.setValue( "songs_path", songsPath_);
-    sets.setValue( "records_path", recordsPath_);
+    sets.setValue( "songs_path", songsDir_.path());
+    sets.setValue( "records_path", recordsDir_.path());
     sets.setValue( "record_input", recordInput_);
     sets.setValue( "ministry_day", ministryDay_);
     sets.setValue( "ministry_time", ministryTime_);
@@ -240,8 +239,7 @@ void vlcEventHandler(const libvlc_event_t* event, void* user_data )
 
     Kiss *k = (Kiss*) user_data;
     
-    switch (event->type)
-    {
+    switch (event->type) {
         case libvlc_VlmMediaInstanceStatusEnd:
             emit k->songFinished();
         default: ;

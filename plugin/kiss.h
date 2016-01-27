@@ -9,6 +9,7 @@
 #include <QObject>
 #include <QString>
 #include <QTime>
+#include <QDir>
 //----------------------------------------------------------------------------//
 struct libvlc_instance_t;
 //----------------------------------------------------------------------------//
@@ -64,10 +65,11 @@ class Kiss : public QObject
         //vlc objects
         libvlc_instance_t *vlcInstance_;
         bool isPlaying_, isRecording_;
-        //khhs settings
-        QString songsPath_;
-        QString recordsPath_;
+        //khss settings
+        QDir songsDir_;
+        QDir recordsDir_;
         QString recordInput_;
+        //TODO deprecated: time management
         int ministryDay_;
         int watchtowerDay_;
         QTime ministryTime_;
