@@ -4,8 +4,6 @@
 #include <QTime>
 #include <QUrl>
 #include <vlc/vlc.h>
-//TODO add SONG_COUNT to setting
-#define SONG_COUNT 142
 //----------------------------------------------------------------------------//
 #define VLC_DEBUG "-I", "dummy", "-vvv"
 #define VLC_USE_CONF "--no-ignore-config", "--config=vlcrc"
@@ -70,6 +68,19 @@ void Kiss:: setRecordInput( QString input)
     {
         recordInput_ = input;
         emit recordInputChanged();
+    }
+}
+//----------------------------------------------------------------------------//
+int Kiss::songsCount() const
+{
+    return songsCount_;
+}
+//----------------------------------------------------------------------------//
+void Kiss::setSongsCount(int count)
+{
+    if (count != songsCount_) {
+        songsCount_ = count;
+        emit songsCountChanged();
     }
 }
 //----------------------------------------------------------------------------//
@@ -199,7 +210,7 @@ void Kiss:: stopMusic()
 //----------------------------------------------------------------------------//
 void Kiss:: playRandom()
 {
-    startMusic( float(qrand()) / RAND_MAX * (SONG_COUNT-1) + 1 );
+    startMusic( float(qrand()) / RAND_MAX * (songsCount_-1) + 1 );
 }
 //----------------------------------------------------------------------------//
 void Kiss:: loadSettings()
@@ -213,6 +224,7 @@ void Kiss:: loadSettings()
     setMinistryTime( sets.value("ministry_time").toTime());
     setWatchtowerDay( sets.value("watchtower_day").toInt());
     setWatchtowerTime( sets.value("watchtower_time").toTime());
+    setSongsCount( sets.value("songs_count").toInt());
 
     qDebug("song path: %s\nrecord path: %s\nrecord input: %s",
            qPrintable(songsDir_.path()),
@@ -231,6 +243,7 @@ void Kiss:: saveSettings()
     sets.setValue( "ministry_time", ministryTime_);
     sets.setValue( "watchtower_day", watchtowerDay_);
     sets.setValue( "watchtower_time", watchtowerTime_);
+    sets.setValue( "songs_count", songsCount_);
 }
 //----------------------------------------------------------------------------//
 void vlcEventHandler(const libvlc_event_t* event, void* user_data )

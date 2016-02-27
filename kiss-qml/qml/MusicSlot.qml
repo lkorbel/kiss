@@ -54,7 +54,7 @@ Rectangle { id: panel
             titleSize: win.text_small
             onClicked: {
                 panel.quering = true; 
-                numbers.getNumber( 1, 144);
+                numbers.getNumber( 1, kiss.songsCount);
             }
         }
     }

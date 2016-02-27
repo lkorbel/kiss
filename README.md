@@ -23,11 +23,10 @@ Application use opensource program VLC. Goal of this project is to write apropri
 
 ## Troubleshooting
 
-1. After building against new version of Qt program crash with info:
-QMetaType::registerType: Binary compatibility break -- Size mismatch for type 'QPaintBufferCacheEntry' [1024]. Previously registered size 16, now registering size 0.
+1. **After building against new version of Qt program crash with info:** QMetaType::registerType: Binary compatibility break -- Size mismatch for type 'QPaintBufferCacheEntry' [1024]. Previously registered size 16, now registering size 0.
 This is because VLC library uses Qt as well. In order to fix this you have to rebuild VLC plugins with new Qt version. You must:
-1. find vlc/plugins/plugins.dat file (on linux in /usr/lib)
-2. remove it and generate new with using vlc-cache-gen: 
+  1. find vlc/plugins/plugins.dat file (on linux in /usr/lib)
+  2. remove it and generate new with using vlc-cache-gen: 
 ~~~
 cd /usr/lib/vlc
 rm plugins/plugins.dat

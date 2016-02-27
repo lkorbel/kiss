@@ -20,6 +20,7 @@ class Kiss : public QObject
     Q_PROPERTY(QString songsPath READ songsPath WRITE setSongsPath NOTIFY songsPathChanged)
     Q_PROPERTY(QString recordsPath READ recordsPath WRITE setRecordsPath NOTIFY recordsPathChanged)
     Q_PROPERTY(QString recordInput READ recordInput WRITE setRecordInput NOTIFY recordInputChanged)
+    Q_PROPERTY(int songsCount READ songsCount WRITE setSongsCount NOTIFY songsCountChanged)
 
     public:
         Kiss( QObject *parent = 0);
@@ -31,6 +32,8 @@ class Kiss : public QObject
         void setRecordsPath( QString path);
         QString recordInput() const;
         void setRecordInput( QString input);
+        int songsCount() const;
+        void setSongsCount(int count);
         int ministryDay() const;
         void setMinistryDay( int day);
         int watchtowerDay() const;
@@ -53,11 +56,12 @@ class Kiss : public QObject
         Q_INVOKABLE void saveSettings();
         
     signals:
-        void meetingDayChanged();
-        void songFinished();
-        void songsPathChanged();
-        void recordsPathChanged();
-        void recordInputChanged();
+        void meetingDayChanged() const;
+        void songFinished() const;
+        void songsPathChanged() const;
+        void recordsPathChanged() const;
+        void recordInputChanged() const;
+        void songsCountChanged() const;
 
     private:
         Q_DISABLE_COPY(Kiss); //we don't want/need copy constructor
@@ -69,6 +73,7 @@ class Kiss : public QObject
         QDir songsDir_;
         QDir recordsDir_;
         QString recordInput_;
+        int songsCount_;
         //TODO deprecated: time management
         int ministryDay_;
         int watchtowerDay_;
