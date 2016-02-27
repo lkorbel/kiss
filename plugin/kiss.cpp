@@ -83,52 +83,6 @@ void Kiss::setSongsCount(int count)
     }
 }
 //----------------------------------------------------------------------------//
-int Kiss::ministryDay() const
-{
-    return ministryDay_;
-}
-//----------------------------------------------------------------------------//
-void Kiss::setMinistryDay( int day)
-{
-    if (ministryDay_ != day) {
-        ministryDay_ = day;
-        emit meetingDayChanged();
-    }
-}
-//----------------------------------------------------------------------------//
-int Kiss::watchtowerDay() const
-{
-    return watchtowerDay_;
-}
-//----------------------------------------------------------------------------//
-void Kiss::setWatchtowerDay( int day)
-{
-    if (watchtowerDay_ != day) {
-        watchtowerDay_ = day;
-        emit meetingDayChanged();
-    }
-}
-//----------------------------------------------------------------------------//
-QTime Kiss::ministryTime() const
-{
-    return ministryTime_;
-}
-//----------------------------------------------------------------------------//
-void Kiss::setMinistryTime( const QTime& time)
-{
-    ministryTime_ = time;
-}
-//----------------------------------------------------------------------------//
-QTime Kiss::watchtowerTime() const
-{
-    return watchtowerTime_;
-}
-//----------------------------------------------------------------------------//
-void Kiss::setWatchtowerTime( const QTime& time)
-{
-    watchtowerTime_ = time;
-}
-//----------------------------------------------------------------------------//
 void Kiss::startRecording( QString name)
 {
     if (isRecording_) {
@@ -219,10 +173,6 @@ void Kiss::loadSettings()
     setSongsPath( sets.value("songs_path").toString());
     setRecordsPath( sets.value("records_path").toString());
     setRecordInput( sets.value("record_input").toString());
-    setMinistryDay( sets.value("ministry_day").toInt());
-    setMinistryTime( sets.value("ministry_time").toTime());
-    setWatchtowerDay( sets.value("watchtower_day").toInt());
-    setWatchtowerTime( sets.value("watchtower_time").toTime());
     setSongsCount( sets.value("songs_count").toInt());
 
     qDebug("song path: %s\nrecord path: %s\nrecord input: %s",
@@ -238,10 +188,6 @@ void Kiss::saveSettings()
     sets.setValue( "songs_path", songsDir_.path());
     sets.setValue( "records_path", recordsDir_.path());
     sets.setValue( "record_input", recordInput_);
-    sets.setValue( "ministry_day", ministryDay_);
-    sets.setValue( "ministry_time", ministryTime_);
-    sets.setValue( "watchtower_day", watchtowerDay_);
-    sets.setValue( "watchtower_time", watchtowerTime_);
     sets.setValue( "songs_count", songsCount_);
 }
 //----------------------------------------------------------------------------//

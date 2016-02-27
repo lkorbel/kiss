@@ -34,14 +34,6 @@ class Kiss : public QObject
         void setRecordInput( QString input);
         int songsCount() const;
         void setSongsCount(int count);
-        int ministryDay() const;
-        void setMinistryDay( int day);
-        int watchtowerDay() const;
-        void setWatchtowerDay( int day);
-        QTime ministryTime() const;
-        void setMinistryTime( const QTime& time);
-        QTime watchtowerTime() const;
-        void setWatchtowerTime( const QTime& time);
         
         //Audio
         Q_INVOKABLE void startRecording( QString name);
@@ -56,7 +48,6 @@ class Kiss : public QObject
         Q_INVOKABLE void saveSettings();
         
     signals:
-        void meetingDayChanged() const;
         void songFinished() const;
         void songsPathChanged() const;
         void recordsPathChanged() const;
@@ -74,11 +65,6 @@ class Kiss : public QObject
         QDir recordsDir_;
         QString recordInput_;
         int songsCount_;
-        //TODO deprecated: time management
-        int ministryDay_;
-        int watchtowerDay_;
-        QTime ministryTime_;
-        QTime watchtowerTime_;
 };
 //----------------------------------------------------------------------------//
 #endif //KHSS_H
