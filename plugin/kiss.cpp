@@ -10,7 +10,7 @@
 //----------------------------------------------------------------------------//
 void vlcEventHandler(const struct libvlc_event_t *, void *);
 //----------------------------------------------------------------------------//
-Kiss:: Kiss( QObject *parent )
+Kiss::Kiss( QObject *parent )
     : QObject( parent),
       isPlaying_(false),
       isRecording_(false)
@@ -26,17 +26,17 @@ Kiss:: Kiss( QObject *parent )
     vlcInstance_ = libvlc_new( argc, argv);
 }
 //----------------------------------------------------------------------------//
-Kiss:: ~Kiss()
+Kiss::~Kiss()
 {
     libvlc_release( vlcInstance_);
 }
 //----------------------------------------------------------------------------//
-QString Kiss:: songsPath() const
+QString Kiss::songsPath() const
 {
     return songsDir_.path();
 }
 //----------------------------------------------------------------------------//
-void Kiss:: setSongsPath( QString path)
+void Kiss::setSongsPath( QString path)
 {
     if (path != songsDir_.path()) {
         songsDir_.setPath(path);
@@ -44,12 +44,12 @@ void Kiss:: setSongsPath( QString path)
     }
 }
 //----------------------------------------------------------------------------//
-QString Kiss:: recordsPath() const
+QString Kiss::recordsPath() const
 {
     return recordsDir_.path();
 }
 //----------------------------------------------------------------------------//
-void Kiss:: setRecordsPath( QString path)
+void Kiss::setRecordsPath( QString path)
 {
     if (path != recordsDir_.path()) {
         recordsDir_.setPath(path);
@@ -57,15 +57,14 @@ void Kiss:: setRecordsPath( QString path)
     }
 }
 //----------------------------------------------------------------------------//
-QString Kiss:: recordInput() const
+QString Kiss::recordInput() const
 {
     return recordInput_;
 }
 //----------------------------------------------------------------------------//
-void Kiss:: setRecordInput( QString input)
+void Kiss::setRecordInput( QString input)
 {
-    if (input != recordInput_)
-    {
+    if (input != recordInput_) {
         recordInput_ = input;
         emit recordInputChanged();
     }
@@ -84,12 +83,12 @@ void Kiss::setSongsCount(int count)
     }
 }
 //----------------------------------------------------------------------------//
-int Kiss:: ministryDay() const
+int Kiss::ministryDay() const
 {
     return ministryDay_;
 }
 //----------------------------------------------------------------------------//
-void Kiss:: setMinistryDay( int day)
+void Kiss::setMinistryDay( int day)
 {
     if (ministryDay_ != day) {
         ministryDay_ = day;
@@ -97,12 +96,12 @@ void Kiss:: setMinistryDay( int day)
     }
 }
 //----------------------------------------------------------------------------//
-int Kiss:: watchtowerDay() const
+int Kiss::watchtowerDay() const
 {
     return watchtowerDay_;
 }
 //----------------------------------------------------------------------------//
-void Kiss:: setWatchtowerDay( int day)
+void Kiss::setWatchtowerDay( int day)
 {
     if (watchtowerDay_ != day) {
         watchtowerDay_ = day;
@@ -110,27 +109,27 @@ void Kiss:: setWatchtowerDay( int day)
     }
 }
 //----------------------------------------------------------------------------//
-QTime Kiss:: ministryTime() const
+QTime Kiss::ministryTime() const
 {
     return ministryTime_;
 }
 //----------------------------------------------------------------------------//
-void Kiss:: setMinistryTime( const QTime& time)
+void Kiss::setMinistryTime( const QTime& time)
 {
     ministryTime_ = time;
 }
 //----------------------------------------------------------------------------//
-QTime Kiss:: watchtowerTime() const
+QTime Kiss::watchtowerTime() const
 {
     return watchtowerTime_;
 }
 //----------------------------------------------------------------------------//
-void Kiss:: setWatchtowerTime( const QTime& time)
+void Kiss::setWatchtowerTime( const QTime& time)
 {
     watchtowerTime_ = time;
 }
 //----------------------------------------------------------------------------//
-void Kiss:: startRecording( QString name)
+void Kiss::startRecording( QString name)
 {
     if (isRecording_) {
         qWarning("KiSS: attempt to restart running record, should stop first");
@@ -152,7 +151,7 @@ void Kiss:: startRecording( QString name)
     else qCritical("KiSS: Couldn't start record");
 }
 //----------------------------------------------------------------------------//
-void Kiss:: stopRecording()
+void Kiss::stopRecording()
 {
     if (isRecording_) {
         libvlc_vlm_stop_media( vlcInstance_, "record");
@@ -161,7 +160,7 @@ void Kiss:: stopRecording()
     }
 }
 //----------------------------------------------------------------------------//
-QString Kiss:: generateRecordName()
+QString Kiss::generateRecordName()
 {
     QString filename = QDate::currentDate().toString("yyyy-MM-dd-dddd");
     if (recordsDir_.exists(filename + ".mp3")) //prevent overwrite
@@ -169,7 +168,7 @@ QString Kiss:: generateRecordName()
     return filename;
 }
 //----------------------------------------------------------------------------//
-void Kiss:: startMusic( int number)
+void Kiss::startMusic( int number)
 {
     if (isPlaying_) {
         qWarning("KiSS: attempt to restart running music, should stop first");
@@ -197,7 +196,7 @@ void Kiss:: startMusic( int number)
     else qCritical("KiSS: Couldn't add music to play");
 }
 //----------------------------------------------------------------------------//
-void Kiss:: stopMusic()
+void Kiss::stopMusic()
 {
     if (isPlaying_) {
         libvlc_vlm_stop_media( vlcInstance_, "music");
@@ -208,12 +207,12 @@ void Kiss:: stopMusic()
     }
 }
 //----------------------------------------------------------------------------//
-void Kiss:: playRandom()
+void Kiss::playRandom()
 {
     startMusic( float(qrand()) / RAND_MAX * (songsCount_-1) + 1 );
 }
 //----------------------------------------------------------------------------//
-void Kiss:: loadSettings()
+void Kiss::loadSettings()
 {
     QSettings sets("kiss.conf", QSettings::IniFormat);
     
@@ -232,7 +231,7 @@ void Kiss:: loadSettings()
            qPrintable(recordInput_));
 }
 //----------------------------------------------------------------------------//
-void Kiss:: saveSettings()
+void Kiss::saveSettings()
 {
     QSettings sets("kiss.conf", QSettings::IniFormat);
     
