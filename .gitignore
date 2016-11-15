@@ -1,3 +1,7 @@
+# Project specific
+
+build/
+
 # C++ objects and libs
 
 *.slo

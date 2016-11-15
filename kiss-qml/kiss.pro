@@ -13,7 +13,7 @@ OTHER_FILES += \
     qml/TitledInput.qml \
     qml/Switch.qml \
     qml/StringDialog.qml \
-    qml/StreamPanel.qml \
+    qml/MoviePanel.qml \
     qml/SettingsPanel.qml \
     qml/NumberDialog.qml \
     qml/MusicSlot.qml \

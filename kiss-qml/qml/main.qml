@@ -8,7 +8,7 @@ ApplicationWindow { id:win
     property int speed: 100
     property int button_radius: 10
     property int button_border: 5
-    property int big_button: (width-6*spacing)/8
+    property int big_button: (height-6*spacing)/5
     property int medium_button: 0.7 * big_button
     property int small_button: 0.5 * big_button
     property real text_large: 20
@@ -46,7 +46,7 @@ ApplicationWindow { id:win
         titleSize: win.text_large
         onSwitchEnabled: {
             music.disable()
-            //stream.disable()
+            movie.disable()
             settings.disable()
             micro_panel.show()
         }
@@ -81,7 +81,7 @@ ApplicationWindow { id:win
         titleSize: win.text_large
         onSwitchEnabled: {
             micro.disable(); 
-            //stream.disable()
+            movie.disable()
             settings.disable()
             music_panel.show() 
         }
@@ -100,30 +100,30 @@ ApplicationWindow { id:win
         onRecordStopRequested: micro_panel.recording(false)
     }    
     
-    /*Switch { id: stream
+    Switch { id: movie
         PropertyAnimation on x { 
             from: - win.big_button - 2 * win.small_button
             to:  4 * win.spacing; duration: 650 }
         y: 4 * win.spacing + 3 * win.big_button
         width: 3 * win.big_button  
         height: win.big_button
-        iconSource: "../img/stream.svg"
+        iconSource: "../img/movie.svg"
         titleText: "Filmy"
         titleSize: win.text_large
-        onEnabled: { 
+        onSwitchEnabled: {
             micro.disable() 
             music.disable()
             settings.disable()
-            stream_panel.show()
+            movie_panel.show()
         }
-        onDisabled: stream_panel.hide()
+        onSwitchDisabled: movie_panel.hide()
     }
-    StreamPanel { id: stream_panel 
-        x: stream.x + stream.width
+    MoviePanel { id: movie_panel
+        x: movie.x + movie.width
         y: main_panel.y + main_panel.height
         height: parent.height - main_panel.height - 6 * win.spacing
         handleY: 3 * win.spacing + 2.5 * win.big_button
-    }*/
+    }
     
     Switch { id: settings
         PropertyAnimation on x { 
@@ -138,7 +138,7 @@ ApplicationWindow { id:win
         onSwitchEnabled: {
             micro.disable()
             music.disable() 
-            //stream.disable()
+            movie.disable()
             settings_panel.show()
         }
         onSwitchDisabled: settings_panel.hide()

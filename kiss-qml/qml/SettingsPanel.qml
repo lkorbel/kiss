@@ -33,36 +33,34 @@ Rectangle { id: panel
         border.width: win.button_border
         color: colors.betaOff
         border.color: colors.alphaOff
-        
-        TitledInput{ id: set1
-            x: parent.border.width
-            y: parent.border.width + win.spacing
-            width: parent.width - 2 * parent.border.width
-            height: win.small_button
-            radius: 0; border.width: 0
-            title: "Songs path:"
-            value: kiss.songsPath
-            onInputChanged: kiss.songsPath = set1.value
-        }
-        TitledInput{ id: set2
-            x: parent.border.width
-            y: set1.y + set1.height + win.spacing
-            width: parent.width - 2 * parent.border.width
-            height: win.small_button
-            radius: 0; border.width: 0
-            title: "Records path:"
-            value: kiss.recordsPath
-            onInputChanged: kiss.recordsPath = set2.value
-        }
-        TitledInput{ id: set3
-            x: parent.border.width
-            y: set2.y + set2.height + win.spacing
-            width: parent.width - 2 * parent.border.width
-            height: win.small_button
-            radius: 0; border.width: 0
-            title: "Record input:"
-            value: kiss.recordInput
-            onInputChanged: kiss.recordInput = set3.value
+        Column {
+            anchors.fill: parent
+            anchors.margins: parent.border.width
+            spacing: parent.border.width
+            TitledInput{ id: set1
+                width: valuesBox.width - 2 * valuesBox.border.width
+                height: win.small_button
+                radius: 0; border.width: 0
+                title: "Songs path:"
+                value: kiss.songsPath
+                onInputChanged: kiss.songsPath = set1.value
+            }
+            TitledInput{ id: set2
+                width: valuesBox.width - 2 * valuesBox.border.width
+                height: win.small_button
+                radius: 0; border.width: 0
+                title: "Records path:"
+                value: kiss.recordsPath
+                onInputChanged: kiss.recordsPath = set2.value
+            }
+            TitledInput{ id: set3
+                width: valuesBox.width - 2 * valuesBox.border.width
+                height: win.small_button
+                radius: 0; border.width: 0
+                title: "Record input:"
+                value: kiss.recordInput
+                onInputChanged: kiss.recordInput = set3.value
+            }
         }
     }
     Rectangle{ id: arm3
