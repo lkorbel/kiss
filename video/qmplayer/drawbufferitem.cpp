@@ -59,10 +59,10 @@ QSGNode* DrawBufferItem::updatePaintNode(QSGNode *, UpdatePaintNodeData*)
     return nullptr;
 
   if (mTextureSizeChanged) { //need to crete new texture
-    mTexture = std::make_unique<BufferTexture>( mTextureSize );
+    mTexture = std::unique_ptr<BufferTexture>( new BufferTexture(mTextureSize) ); //TODO make_unique
     mTexture->setFiltering( QSGTexture::Linear );
     if (!mNode) //ensure node is created
-      mNode = std::make_unique<QSGSimpleTextureNode>();
+      mNode = std::unique_ptr<QSGSimpleTextureNode>( new QSGSimpleTextureNode() ); //TODO make_unique
     mNode->setRect( mRect );
     mNode->setTexture( mTexture.get() );
     mNode->markDirty( QSGNode::DirtyGeometry | QSGNode::DirtyMaterial );

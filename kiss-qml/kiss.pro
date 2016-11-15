@@ -1,7 +1,7 @@
 TARGET = KiSS
 TEMPLATE = app
 
-QT = core gui qml quick
+QT = core gui qml quick widgets
 
 OBJECTS_DIR = build
 MOC_DIR = build
@@ -24,3 +24,11 @@ OTHER_FILES += \
     qml/Colors.qml \
     qml/ButtonGradient.qml \
     qml/Button.qml
+
+qml_files.path = $$OUT_PWD
+qml_files.files = qml
+images.path = $$OUT_PWD
+images.files = img
+settings.path = $$OUT_PWD
+settings.files = ../conf/*
+INSTALLS += qml_files images settings

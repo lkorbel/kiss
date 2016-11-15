@@ -1,7 +1,6 @@
 #include "buffertexture.h"
 #include <QMutexLocker>
 #include <QOpenGLFunctions>
-#include <GLES3/gl3.h>
 
 /*!
  * \class BufferTexture

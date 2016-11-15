@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.3
 
 Rectangle { id: button
     
@@ -7,17 +7,18 @@ Rectangle { id: button
     property string iconSource: ""
     property bool active: false
     
-    signal enabled
-    signal disabled
+    signal switchEnabled
+    signal switchDisabled
+
     function enable() { 
-        active = true;
-        state = "on";
-        button.enabled();
+        button.active = true;
+        button.state = "on";
+        button.switchEnabled();
     }
     function disable() { 
-        active = false;
-        state = "off";
-        button.disabled();
+        button.active = false;
+        button.state = "off";
+        button.switchDisabled();
     }
     
     state: "off"
@@ -49,7 +50,7 @@ Rectangle { id: button
         onEntered:  { button.state = "hovered"; }
         onExited:   { button.active ? button.state = "on" : button.state = "off" }
         onPressed:  { button.state = "pressed" }
-        onReleased: { button.active = true; button.state = "on"; button.enabled()}
+        onReleased: { button.active = true; button.state = "on"; button.switchEnabled()}
     }
     
     states: 

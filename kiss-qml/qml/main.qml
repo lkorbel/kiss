@@ -1,7 +1,9 @@
-import QtQuick 2.0
+import QtQuick 2.3
+import QtQuick.Controls 1.2
 import lukhaz.theo.Kiss 1.0
+import "."
 
-Rectangle { id:win
+ApplicationWindow { id:win
     property int spacing: 10
     property int speed: 100
     property int button_radius: 10
@@ -13,8 +15,10 @@ Rectangle { id:win
     property real text_medium: 14
     property real text_small: 11
     color: "#9faaaaaa"
-    width: 860
-    height: 560
+    width: 1000
+    height: 700
+    visible: true
+    title: "Kingdom Hall Sound System"
     
     Colors { id: colors }
     Kiss { id: kiss }
@@ -37,15 +41,15 @@ Rectangle { id:win
         width: 4 * win.big_button
         height: win.big_button
         iconSource: "../img/micro.svg"
-        titleText: "Nagrywanie programu"
+        titleText: qsTr("Nagrywanie programu")
         titleSize: win.text_large
-        onEnabled: {
+        onSwitchEnabled: {
             music.disable()
             //stream.disable()
             settings.disable()
             micro_panel.show()
         }
-        onDisabled: micro_panel.hide()
+        onSwitchDisabled: micro_panel.hide()
     }
     MicroPanel { id: micro_panel 
         x: micro.x + micro.width
@@ -56,10 +60,10 @@ Rectangle { id:win
         onRecording: {
             if (active) {
                 kiss.startRecording( record )
-                micro.titleText = "Trwa nagrywanie"
+                micro.titleText = qsTr("Trwa nagrywanie")
             } else {
                 kiss.stopRecording()
-                micro.titleText = "Nagrywanie programu"
+                micro.titleText = qsTr("Nagrywanie programu")
             }
         }
     }
@@ -72,15 +76,15 @@ Rectangle { id:win
         width: 3 * win.big_button  
         height: win.big_button
         iconSource: "../img/music.svg"
-        titleText: "Muzyka"
+        titleText: qsTr("Muzyka")
         titleSize: win.text_large
-        onEnabled: { 
+        onSwitchEnabled: {
             micro.disable(); 
             //stream.disable()
             settings.disable()
             music_panel.show() 
         }
-        onDisabled: music_panel.hide()
+        onSwitchDisabled: music_panel.hide()
     }
     MusicPanel { id: music_panel 
         x: music.x + music.width
@@ -128,15 +132,15 @@ Rectangle { id:win
         width: 3 * win.big_button  
         height: win.big_button
         iconSource: "../img/settings.svg"
-        titleText: "Ustawienia"
+        titleText: qsTr("Ustawienia")
         titleSize: win.text_large
-        onEnabled: { 
+        onSwitchEnabled: {
             micro.disable()
             music.disable() 
             //stream.disable()
             settings_panel.show()
         }
-        onDisabled: settings_panel.hide()
+        onSwitchDisabled: settings_panel.hide()
     }
     SettingsPanel { id: settings_panel 
         x: settings.x + settings.width

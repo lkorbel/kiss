@@ -11,7 +11,7 @@ Kingdom Hall Sound System
     - send signal on speakers
     - record to file 
 
-Application use opensource program VLC. Goal of this project is to write apropriate interface to use on Kingdom Hall. Selected technology is Qt5 QML.
+Application use VLC library. Goal of this project is to write apropriate interface to use on Kingdom Hall. Selected technology is Qt5 QML.
 
 ## Repository structure
 

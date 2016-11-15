@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.3
 
 Item { id: panel
     
@@ -61,12 +61,12 @@ Item { id: panel
         height: win.medium_button; width: 2 * win.medium_button; radius: win.button_radius
         opacity: 0
         titleText: "Losowo"; titleSize: win.text_medium
-        onEnabled: {
+        onSwitchEnabled: {
             music_prog.disable();
             mode = 0;
             kiss.playRandom()
         }
-        onDisabled: {
+        onSwitchDisabled: {
             if (mode == 0)
             {
                 kiss.stopMusic();
@@ -80,12 +80,12 @@ Item { id: panel
         width: 2 * win.medium_button; height: win.medium_button; radius: win.button_radius
         opacity: 0
         titleText: "Zebranie"; titleSize: win.text_medium
-        onEnabled: {
+        onSwitchEnabled: {
              music_rand.disable();
              song_panel.state = "shown";
              songPanelSequence.running = true;
          }
-         onDisabled: {
+         onSwitchDisabled: {
              song_panel.state = "hidden";
              songPanelSequence.running = false;
              //resting song panel animation

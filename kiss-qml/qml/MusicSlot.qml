@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.3
 
 Rectangle { id: panel
     
@@ -33,7 +33,7 @@ Rectangle { id: panel
             radius:0
             titleText: title
             titleSize: win.text_small
-            onEnabled:  {
+            onSwitchEnabled:  {
                 if (value != "???") 
                     panel.started()
                 else
@@ -43,7 +43,7 @@ Rectangle { id: panel
                     valuator.state = "pressed"; //give user hint where to click
                 }
             }
-            onDisabled: panel.stopped()
+            onSwitchDisabled: panel.stopped()
         }
         Button { id: valuator
             y: panel.border.width

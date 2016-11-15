@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.3
 Item { id: panel
     
     property int handleY: 0
@@ -103,7 +103,7 @@ Item { id: panel
                 width: 1.5 * win.medium_button; height: win.medium_button
                 radius: 0; border.width: 0
                 titleText: "TAK"; titleSize: win.text_medium
-                onEnabled: {
+                onSwitchEnabled: {
                     prompt(false)
                     if (record != "") //proceed only if record name given
                     {
@@ -123,7 +123,7 @@ Item { id: panel
                 radius: 0; border.width: 0
                 titleText: "NIE"; titleSize: win.text_medium
                 state: "on"; active: true
-                onEnabled: {
+                onSwitchEnabled: {
                     prompt(false)
                     buttonYes.disable();
                     recording( false );

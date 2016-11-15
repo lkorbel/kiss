@@ -8,11 +8,7 @@ uri = lukhaz.theo.Kiss
 
 # Input
 SOURCES += kiss.cpp kiss_plugin.cpp
-    #drawbufferitem.cpp
-    #buffertexture.cpp
 HEADERS += kiss.h
-    #drawbufferitem.h
-    #buffertexture.h
 OTHER_FILES = qmldir
 
 #Cross-builds on linux x86_64 host
