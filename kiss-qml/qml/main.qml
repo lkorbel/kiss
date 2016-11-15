@@ -1,5 +1,5 @@
-import QtQuick 2.3
-import QtQuick.Controls 1.2
+import QtQuick 2.5
+import QtQuick.Controls 1.4
 import lukhaz.theo.Kiss 1.0
 import "."
 
@@ -8,15 +8,16 @@ ApplicationWindow { id:win
     property int speed: 100
     property int button_radius: 10
     property int button_border: 5
-    property int big_button: (width-6*spacing)/8 > (height-6*spacing)/5 ? (height-6*spacing)/5 : (width-6*spacing)/8
+    property int big_button: (width-6*spacing)/8
     property int medium_button: 0.7 * big_button
     property int small_button: 0.5 * big_button
-    property real text_large: 24
+    property real text_large: 20
     property real text_medium: 14
     property real text_small: 11
     color: "#9faaaaaa"
-    width: 1000
-    height: 700
+    //width/height ratio is 8/5
+    width: 8 * 130
+    height: 5 * 130
     visible: true
     title: "Kingdom Hall Sound System"
     
@@ -128,7 +129,7 @@ ApplicationWindow { id:win
         PropertyAnimation on x { 
             from: - win.big_button - 3 * win.small_button
             to: 4 * win.spacing; duration: 700 }
-        y: 5 * win.spacing + 5 * win.big_button
+        y: 5 * win.spacing + 4 * win.big_button
         width: 3 * win.big_button  
         height: win.big_button
         iconSource: "../img/settings.svg"

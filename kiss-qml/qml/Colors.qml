@@ -1,4 +1,4 @@
-import QtQuick 2.3
+import QtQuick 2.5
 
 QtObject{
     property color alphaOff:   "#1d3340"

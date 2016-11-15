@@ -1,4 +1,4 @@
-import QtQuick 2.3
+import QtQuick 2.5
 
 Rectangle { id: panel
     
@@ -42,6 +42,7 @@ Rectangle { id: panel
             radius: 0; border.width: 0
             title: "Songs path:"
             value: kiss.songsPath
+            onInputChanged: kiss.songsPath = set1.value
         }
         TitledInput{ id: set2
             x: parent.border.width
@@ -51,6 +52,7 @@ Rectangle { id: panel
             radius: 0; border.width: 0
             title: "Records path:"
             value: kiss.recordsPath
+            onInputChanged: kiss.recordsPath = set2.value
         }
         TitledInput{ id: set3
             x: parent.border.width
@@ -60,6 +62,7 @@ Rectangle { id: panel
             radius: 0; border.width: 0
             title: "Record input:"
             value: kiss.recordInput
+            onInputChanged: kiss.recordInput = set3.value
         }
     }
     Rectangle{ id: arm3

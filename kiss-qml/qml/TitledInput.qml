@@ -1,25 +1,15 @@
-import QtQuick 2.3
-
+import QtQuick 2.5
+import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
 Rectangle { id: panel
     
     property string title: "Title:"
-    property string value: "???"
-    property bool quering : false
+    property alias value: field.text
     
     signal started
     signal stopped
-    
-    function setValue( newValue) {
-        if (quering == true)
-        {
-            value = newValue;
-            quering = false;
-        }
-    }
-    function stop() {
-        activator.disable();
-    }
-    
+    signal inputChanged
+
     radius: win.button_radius
     border.width: win.button_border
     border.color: colors.alphaOff
@@ -38,22 +28,23 @@ Rectangle { id: panel
                 text: title
                 font.pointSize: win.text_small
                 color: colors.gammaOff
-            }
-            
+            }           
         }
-        Rectangle { 
+
+        TextField { id: field
             y: panel.border.width;
-            height: panel.height - 2 * y; width: 3 * panel.width / 4 - y; 
-            border.width: 0
-            radius:0
-            color: colors.betaHover
-            TextInput{
-                anchors.fill: parent
-                verticalAlignment: TextInput.AlignVCenter
-                text: value
-                font.pointSize: win.text_small
-                color: colors.gammaHover
+            height: panel.height - 2 * y;
+            width: 3 * panel.width / 4 - y;
+            style: TextFieldStyle {
+                textColor: colors.gammaHover
+                background: Rectangle {
+                    border.width: 0
+                    radius:0
+                    color: colors.betaHover
+                }
             }
+            font.pointSize: win.text_small
+            onEditingFinished: panel.inputChanged()
         }
     }
 }
