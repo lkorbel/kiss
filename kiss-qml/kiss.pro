@@ -21,6 +21,8 @@ OTHER_FILES += \
     qml/main.qml \
     qml/MicroPanel.qml \
     qml/MoviePanel.qml \
+    qml/MovieSlot.qml \
+    qml/MoviePlayer.qml \
     qml/MusicPanel.qml \
     qml/MusicSlot.qml \
     qml/SettingsPanel.qml

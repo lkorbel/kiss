@@ -67,9 +67,14 @@ Item { id: panel
         height: win.small_button
         titleText: "+"
         titleSize: win.text_small
+        onClicked: moviePlayer.play("file:///home/lukhaz/Pobrane/imie_Jehowa.mp4")
 
     }
-                
+
+    MoviePlayer {
+        id: moviePlayer
+    }
+
     states:
     [
         State { name: "hidden";  
