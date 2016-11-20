@@ -1,10 +1,9 @@
 import QtQuick 2.5
 
-Rectangle { id: panel
+Item { id: panel
     
     property int handleY: 0
     
-    color: "#00000000"
     state: "hidden"
     
     function show() { state = "shown"; }

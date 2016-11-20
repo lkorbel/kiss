@@ -13,7 +13,6 @@ OTHER_FILES += \
     qml/components/TitledInput.qml \
     qml/components/TitledNumberBox.qml \
     qml/Colors.qml \
-    qml/components/ButtonGradient.qml \
     qml/components/Button.qml \
     qml/components/NumberDialog.qml \
     qml/components/StringDialog.qml \

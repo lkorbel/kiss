@@ -18,7 +18,7 @@ Rectangle { id: panel
     
     Row {
         x: panel.border.width
-        spacing: panel.border.width
+        spacing: win.spacing
         Rectangle { id: title_rect
             y: panel.border.width;
             height: panel.height - 2 * y

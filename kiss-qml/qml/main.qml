@@ -22,7 +22,9 @@ ApplicationWindow { id:win
     
     Colors { id: colors }
     Kiss { id: kiss }
-    
+    Item { id: internal
+        property double panelOffsetY: main_panel.y + main_panel.height
+    }
     MainPanel { id: main_panel 
         x: 3 * win.spacing
         PropertyAnimation on y { 
@@ -53,10 +55,10 @@ ApplicationWindow { id:win
     }
     MicroPanel { id: micro_panel 
         x: micro.x + micro.width
-        y: main_panel.y + main_panel.height
+        y: internal.panelOffsetY
         width: main_panel.width - micro.width
         height: parent.height - main_panel.height - 6 * win.spacing
-        handleY: win.spacing + 0.5 * win.big_button
+        handleY: micro.y + micro.height/2 - internal.panelOffsetY
         onRecording: {
             if (active) {
                 kiss.startRecording( record )
@@ -88,10 +90,10 @@ ApplicationWindow { id:win
     }
     MusicPanel { id: music_panel 
         x: music.x + music.width
-        y: main_panel.y + main_panel.height
+        y: internal.panelOffsetY
         width: main_panel.width - music.width
         height: parent.height - main_panel.height - 6 * win.spacing
-        handleY: 2 * win.spacing + 1.5 * win.big_button
+        handleY: music.y + music.height/2 - internal.panelOffsetY
         onRecordStartRequested: {
             micro.enable()
             micro_panel.prompt(true)
@@ -119,9 +121,9 @@ ApplicationWindow { id:win
     }
     MoviePanel { id: movie_panel
         x: movie.x + movie.width
-        y: main_panel.y + main_panel.height
+        y: internal.panelOffsetY
         height: parent.height - main_panel.height - 6 * win.spacing
-        handleY: 3 * win.spacing + 2.5 * win.big_button
+        handleY: movie.y + movie.height/2 - internal.panelOffsetY
     }
     
     UI.Switch { id: settings
@@ -144,10 +146,10 @@ ApplicationWindow { id:win
     }
     SettingsPanel { id: settings_panel 
         x: settings.x + settings.width
-        y: main_panel.y + main_panel.height
+        y: internal.panelOffsetY
         width: main_panel.width - settings.width
         height: parent.height - main_panel.height - 6 * win.spacing
-        handleY: 4 * win.spacing + 4 * win.big_button
+        handleY: settings.y + settings.height / 2 - internal.panelOffsetY
     }
 
     //Dialogs

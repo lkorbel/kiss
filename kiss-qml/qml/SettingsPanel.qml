@@ -3,11 +3,10 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import "components" as UI
 
-Rectangle { id: panel
+Item { id: panel
     
     property int handleY: 0
     
-    color: "#00000000"
     state: "hidden"
     
     function show() { state = "shown"; }
@@ -42,9 +41,7 @@ Rectangle { id: panel
             anchors.margins: valuesBox.border.width
             horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
         Column {
-            //anchors.fill: parent
-            //anchors.margins: panel.border.width
-            spacing: panel.border.width
+            spacing: win.spacing
             UI.TitledInput{ id: set1
                 width: valuesBox.width - 6 * valuesBox.border.width
                 height: win.small_button
