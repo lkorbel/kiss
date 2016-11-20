@@ -1,4 +1,5 @@
 import QtQuick 2.5
+import "components" as UI
 
 Rectangle { id: panel
     
@@ -26,7 +27,7 @@ Rectangle { id: panel
     color: colors.betaOff
     
     Row { x: panel.border.width
-        Switch { id: activator
+        UI.Switch { id: activator
             y: panel.border.width;
             height: panel.height - 2 * y; width: panel.width / 2 - y; 
             border.width: 0
@@ -45,7 +46,7 @@ Rectangle { id: panel
             }
             onSwitchDisabled: panel.stopped()
         }
-        Button { id: valuator
+        UI.Button { id: valuator
             y: panel.border.width
             height: panel.height - 2 * y; width: panel.width / 2 - y;
             border.width: 0

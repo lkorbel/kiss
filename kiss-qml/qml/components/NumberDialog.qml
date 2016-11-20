@@ -12,6 +12,9 @@ Rectangle { id: dialog
         dialog.state = "query";
         grid.rows = Math.floor((dialog.height - 3 * win.spacing) / (dialog.elementSize + win.spacing));
         grid.columns = Math.floor((dialog.width - 3 * win.spacing)  / (dialog.elementSize + win.spacing));
+        var maxElements = grid.rows * grid.columns;
+        if (dialog.elements >  maxElements)
+            console.log("Try to show " + dialog.elements + " elements in dialog but " + maxElements + " is maximum!")
         grid.x = (dialog.width - grid.columns * (dialog.elementSize + win.spacing)) / 2;
         grid.y = (dialog.height - Math.ceil( dialog.elements / grid.columns) * (dialog.elementSize + win.spacing)) / 2;
         //console.log("w " + dialog.width + ", h " + dialog.height + ", rows " + grid.rows + ", cols" + grid.columns + ", x" + grid.x + ", y" + grid.y + "space" + (dialog.elementSize + win.spacing));

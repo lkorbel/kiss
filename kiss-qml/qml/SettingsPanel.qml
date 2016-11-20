@@ -1,4 +1,7 @@
 import QtQuick 2.5
+import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
+import "components" as UI
 
 Rectangle { id: panel
     
@@ -26,41 +29,55 @@ Rectangle { id: panel
     }
     
     Rectangle{ id: valuesBox
-        x: arm2.x - (width - arm2.width) / 4
+        x: arm2.x - (width - arm2.width) / 6
         y: arm2.y - valuesBox.height
-        width: 4 * win.big_button; height: 2 * win.big_button
+        width: 4 * win.big_button;
+        height: 2 * win.big_button
         radius: win.button_radius
         border.width: win.button_border
         color: colors.betaOff
         border.color: colors.alphaOff
-        Column {
+        ScrollView {
             anchors.fill: parent
-            anchors.margins: parent.border.width
-            spacing: parent.border.width
-            TitledInput{ id: set1
-                width: valuesBox.width - 2 * valuesBox.border.width
+            anchors.margins: valuesBox.border.width
+            horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
+        Column {
+            //anchors.fill: parent
+            //anchors.margins: panel.border.width
+            spacing: panel.border.width
+            UI.TitledInput{ id: set1
+                width: valuesBox.width - 6 * valuesBox.border.width
                 height: win.small_button
                 radius: 0; border.width: 0
-                title: "Songs path:"
+                title: qsTr("Katalog z pieśniami:")
                 value: kiss.songsPath
                 onInputChanged: kiss.songsPath = set1.value
             }
-            TitledInput{ id: set2
-                width: valuesBox.width - 2 * valuesBox.border.width
+            UI.TitledNumberBox{ id: set4
+                width: valuesBox.width - 6 * valuesBox.border.width
                 height: win.small_button
                 radius: 0; border.width: 0
-                title: "Records path:"
+                title: qsTr("Ilość pieśni:")
+                value: kiss.songsCount
+                onInputChanged: kiss.songsCount = set4.value
+            }
+            UI.TitledInput{ id: set2
+                width: valuesBox.width - 6 * valuesBox.border.width
+                height: win.small_button
+                radius: 0; border.width: 0
+                title: qsTr("Katalog na nagrania:")
                 value: kiss.recordsPath
                 onInputChanged: kiss.recordsPath = set2.value
             }
-            TitledInput{ id: set3
-                width: valuesBox.width - 2 * valuesBox.border.width
+            UI.TitledInput{ id: set3
+                width: valuesBox.width - 6 * valuesBox.border.width
                 height: win.small_button
                 radius: 0; border.width: 0
-                title: "Record input:"
+                title: qsTr("Źródło nagrywania:")
                 value: kiss.recordInput
                 onInputChanged: kiss.recordInput = set3.value
             }
+        }
         }
     }
     Rectangle{ id: arm3
@@ -75,7 +92,7 @@ Rectangle { id: panel
         height: win.small_button
         color: colors.alphaOff
     }
-    Button{
+    UI.Button{
         x: arm3.x - (width-arm3.width) / 2
         y: arm3.y + arm3.height
         width: 1.5 * win.small_button
@@ -84,7 +101,7 @@ Rectangle { id: panel
         titleSize: 0.8 * win.text_small
         onClicked: kiss.loadSettings()
     }
-    Button{
+    UI.Button{
         x: arm4.x - (width-arm4.width) / 2
         y: arm4.y + arm4.height
         width: 1.5  * win.small_button

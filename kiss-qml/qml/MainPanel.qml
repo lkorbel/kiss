@@ -1,4 +1,5 @@
 import QtQuick 2.5
+import "components" as UI
 
 Rectangle { 
     radius: win.button_radius
@@ -12,7 +13,7 @@ Rectangle {
         color: colors.alphaOff
         text: "Kingdom Hall Sound System"
     }
-    Button {
+    UI.Button {
         anchors.top: parent.top; anchors.right: parent.right
         anchors.margins: (parent.height - win.small_button) / 2
         titleText: "x"

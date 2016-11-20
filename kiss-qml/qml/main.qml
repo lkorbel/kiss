@@ -1,7 +1,7 @@
 import QtQuick 2.5
 import QtQuick.Controls 1.4
 import lukhaz.theo.Kiss 1.0
-import "."
+import "components" as UI
 
 ApplicationWindow { id:win
     property int spacing: 10
@@ -15,9 +15,8 @@ ApplicationWindow { id:win
     property real text_medium: 14
     property real text_small: 11
     color: "#9faaaaaa"
-    //width/height ratio is 8/5
-    width: 8 * 130
-    height: 5 * 130
+    width: 8 * 150
+    height: 5 * 150
     visible: true
     title: "Kingdom Hall Sound System"
     
@@ -34,14 +33,14 @@ ApplicationWindow { id:win
         width: 8 * win.big_button
     }
 
-    Switch { id: micro
+    UI.Switch { id: micro
         PropertyAnimation on x { 
             from: - win.big_button
             to: 4 * win.spacing; duration: 550 }
         y: 2 * win.spacing + win.big_button
         width: 4 * win.big_button
         height: win.big_button
-        iconSource: "../img/micro.svg"
+        iconSource: "../../img/micro.svg"
         titleText: qsTr("Nagrywanie programu")
         titleSize: win.text_large
         onSwitchEnabled: {
@@ -69,14 +68,14 @@ ApplicationWindow { id:win
         }
     }
     
-    Switch { id: music
+    UI.Switch { id: music
         PropertyAnimation on x { 
             from: - win.big_button - win.small_button
             to: 4 * win.spacing; duration: 600 }
         y: 3 * win.spacing + 2 * win.big_button
         width: 3 * win.big_button  
         height: win.big_button
-        iconSource: "../img/music.svg"
+        iconSource: "../../img/music.svg"
         titleText: qsTr("Muzyka")
         titleSize: win.text_large
         onSwitchEnabled: {
@@ -100,14 +99,14 @@ ApplicationWindow { id:win
         onRecordStopRequested: micro_panel.recording(false)
     }    
     
-    Switch { id: movie
+    UI.Switch { id: movie
         PropertyAnimation on x { 
             from: - win.big_button - 2 * win.small_button
             to:  4 * win.spacing; duration: 650 }
         y: 4 * win.spacing + 3 * win.big_button
         width: 3 * win.big_button  
         height: win.big_button
-        iconSource: "../img/movie.svg"
+        iconSource: "../../img/movie.svg"
         titleText: "Filmy"
         titleSize: win.text_large
         onSwitchEnabled: {
@@ -125,14 +124,14 @@ ApplicationWindow { id:win
         handleY: 3 * win.spacing + 2.5 * win.big_button
     }
     
-    Switch { id: settings
+    UI.Switch { id: settings
         PropertyAnimation on x { 
             from: - win.big_button - 3 * win.small_button
             to: 4 * win.spacing; duration: 700 }
         y: 5 * win.spacing + 4 * win.big_button
         width: 3 * win.big_button  
         height: win.big_button
-        iconSource: "../img/settings.svg"
+        iconSource: "../../img/settings.svg"
         titleText: qsTr("Ustawienia")
         titleSize: win.text_large
         onSwitchEnabled: {
@@ -148,17 +147,17 @@ ApplicationWindow { id:win
         y: main_panel.y + main_panel.height
         width: main_panel.width - settings.width
         height: parent.height - main_panel.height - 6 * win.spacing
-        handleY: 4 * win.spacing + 4.5 * win.big_button
+        handleY: 4 * win.spacing + 4 * win.big_button
     }
 
     //Dialogs
-    NumberDialog{ id: numbers
+    UI.NumberDialog{ id: numbers
         anchors.centerIn:parent
         width: parent.width - 7 *win.spacing; height: parent.height - 7 * win.spacing
         elementSize: 0.4 * win.big_button
         onChoosed: music_panel.setSong( value );
     }
-    StringDialog{ id: strings
+    UI.StringDialog{ id: strings
         anchors.centerIn:parent
         width: 4 * win.big_button; height: 2 * win.big_button
         onChoosed: micro_panel.setRecordName( value );

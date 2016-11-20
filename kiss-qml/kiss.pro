@@ -10,20 +10,22 @@ SOURCES = src/main.cpp
  
 
 OTHER_FILES += \
-    qml/TitledInput.qml \
-    qml/Switch.qml \
-    qml/StringDialog.qml \
-    qml/MoviePanel.qml \
-    qml/SettingsPanel.qml \
-    qml/NumberDialog.qml \
-    qml/MusicSlot.qml \
-    qml/MusicPanel.qml \
-    qml/MicroPanel.qml \
+    qml/components/TitledInput.qml \
+    qml/components/TitledNumberBox.qml \
+    qml/Colors.qml \
+    qml/components/ButtonGradient.qml \
+    qml/components/Button.qml \
+    qml/components/NumberDialog.qml \
+    qml/components/StringDialog.qml \
+    qml/components/Switch.qml \
     qml/MainPanel.qml \
     qml/main.qml \
-    qml/Colors.qml \
-    qml/ButtonGradient.qml \
-    qml/Button.qml
+    qml/MicroPanel.qml \
+    qml/MoviePanel.qml \
+    qml/MusicPanel.qml \
+    qml/MusicSlot.qml \
+    qml/SettingsPanel.qml
+
 
 qml_files.path = $$OUT_PWD
 qml_files.files = qml

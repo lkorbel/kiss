@@ -1,4 +1,6 @@
 import QtQuick 2.5
+import "components" as UI
+
 Item { id: panel
     
     property int handleY: 0
@@ -79,7 +81,7 @@ Item { id: panel
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
             }
-            Button{ id: recordname
+            UI.Button{ id: recordname
                 width: mainArea.width - 4 * mainArea.border.width - fileLabel.width
                 height: win.small_button
                 border.width: 0; radius: 0
@@ -99,7 +101,7 @@ Item { id: panel
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
             }
-            Switch{ id: buttonYes
+            UI.Switch{ id: buttonYes
                 width: 1.5 * win.medium_button; height: win.medium_button
                 radius: 0; border.width: 0
                 titleText: "TAK"; titleSize: win.text_medium
@@ -118,7 +120,7 @@ Item { id: panel
                     }
                 }
             }
-            Switch{ id: buttonNo
+            UI.Switch{ id: buttonNo
                 width: 1.5 * win.medium_button; height: win.medium_button
                 radius: 0; border.width: 0
                 titleText: "NIE"; titleSize: win.text_medium

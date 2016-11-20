@@ -1,4 +1,5 @@
 import QtQuick 2.5
+import "components" as UI
 
 Item { id: panel
     
@@ -55,7 +56,7 @@ Item { id: panel
         color: colors.alphaOff
     }
     
-    Switch { id: music_rand
+    UI.Switch { id: music_rand
         x: arm2.x - (width - arm2.width) / 2
         y: arm2.y + (arm2.height - height) / 2
         height: win.medium_button; width: 2 * win.medium_button; radius: win.button_radius
@@ -74,7 +75,7 @@ Item { id: panel
             }
         }
     }
-    Switch { id: music_prog
+    UI.Switch { id: music_prog
         x: arm2.x - (width - arm2.width) / 2
         y: arm2.y + arm2.height
         width: 2 * win.medium_button; height: win.medium_button; radius: win.button_radius
