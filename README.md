@@ -20,6 +20,9 @@ Application use VLC library. Goal of this project is to write apropriate interfa
 * *kiss-qml* main version of UI base on QtQuick (needs OpenGL support in OS)
 * *plugin* library based on libVLC providing all backend functionality 
 
+## Prepare to build
+
+Download https://github.com/RSATom/QmlVlc and copy files (including two nested repositories) to *kiss-qml/QmlVlc* directory.
 
 ## Troubleshooting
 

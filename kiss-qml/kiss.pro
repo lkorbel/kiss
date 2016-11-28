@@ -1,12 +1,14 @@
 TARGET = KiSS
 TEMPLATE = app
 
-QT = core gui qml quick widgets
+QT = core gui qml quick multimedia
+CONFIG += c++11
 
 OBJECTS_DIR = build
 MOC_DIR = build
 
-SOURCES = src/main.cpp
+include(QmlVlc/QmlVlc.pri)
+SOURCES += src/main.cpp
  
 
 OTHER_FILES += \
